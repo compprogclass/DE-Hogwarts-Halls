@@ -1,0 +1,64 @@
+use Libraries.Robots.Lego.Button
+use Libraries.Robots.Lego.Sound
+use Libraries.Robots.Lego.Screen
+use Libraries.Robots.Lego.Motor
+use Libraries.Robots.Lego.InfraredSensor
+use Libraries.Robots.Lego.TouchSensor 
+use Libraries.Robots.Lego.ColorSensor
+use Mover 
+use Sounder
+
+boolean dere = true 
+InfraredSensor irs
+irs:SetPort(1)
+/*InfraredSensor irs3
+irs3:SetPort(3)*/
+TouchSensor Ts
+Ts:SetPort(4)
+/*TouchSensor Ts2
+Ts2:SetPort(2)*/
+Mover mov
+ColorSensor cs
+cs:SetPort(2)
+Sounder snd
+/*repeat while irs:GetDistance()>50
+     mov:moveForwordFor()
+end
+mov:stop() 
+
+mov:turnRight()
+mov:moveForword(200)
+mov:turnLeft()
+if irs:GetDistance()<100 
+    repeat until Ts:IsPressed() 
+        mov:moveBackwordFor()
+    end
+mov:stop() 
+end*/
+
+
+//mov:turnLeft()
+//mov:moveBackword (200)
+
+
+repeat until Ts:IsPressed()
+    snd:readColor(cs)
+
+    //if dere = true 
+    mov:moveForwordFor()
+    // mov:moveForword(200) - didn't work because needs to finish rotation of degrees before checking dist. sensor 
+    //else 
+    //    mov:moveBackwordFor()
+    //end
+   /* if Ts2:IsPressed()
+        dere = dere not= true
+    end */
+    if irs:GetDistance() <25
+       mov:stop()
+       mov:turnLeft()
+/*    elseif irs3:GetDistance() <40
+       mov:stop()
+       mov:turnRight()*/
+    end
+end
+mov:stop()

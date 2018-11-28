@@ -1,0 +1,51 @@
+use Libraries.Robots.Lego.Sound
+use Libraries.Robots.Lego.ColorSensor
+use Libraries.Robots.Lego.Utility
+use Libraries.Robots.Lego.Screen
+use Mover 
+
+class Sounder 
+   // ColorSensor cs
+    Utility utility
+    Screen screen 
+    Sound sound
+    Mover mov
+    boolean house = false
+    action readColor(ColorSensor cs)
+        text color = ""
+        //repeat 5 times
+            color=cs:GetColor()
+            if color = "none"  
+                sound:Buzz()
+                mov:stop()
+                house = false
+            elseif color="yellow" or color = "brown"
+                sound:PlayTone(5000,250)
+                screen:OutputCenterLarge("Hufflepuff",4)
+                house=true
+            elseif color="green"
+                sound:PlayTone(4000,250)
+                screen:OutputCenterLarge("Slytherin",4)
+                house=true
+            elseif color="blue"
+                sound:PlayTone(3000,250)
+                screen:OutputCenterLarge("Ravenclaw",4)
+                house=true
+            elseif color="red"
+                sound:PlayTone(2000,250)
+                screen:OutputCenterLarge("Gryffindor0",4)
+                house=true
+            else
+                screen:OutputCenterLarge(color, 4)
+                house = false
+            end
+            utility:DelayMilliseconds(500)
+            screen:Clear()
+        //end 
+            if house= false
+                mov:moveBackword(200)
+                mov:turnLeft()
+            end 
+    end    
+end
+

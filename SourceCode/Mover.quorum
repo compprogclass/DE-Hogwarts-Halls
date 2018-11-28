@@ -1,0 +1,49 @@
+use Libraries.Robots.Lego.Button
+use Libraries.Robots.Lego.Sound
+use Libraries.Robots.Lego.Screen
+use Libraries.Robots.Lego.Motor
+
+class Mover 
+    Motor motorCtrl
+
+    action moveForword (number mm)
+        mm = mm*2.118
+
+        motorCtrl:RotateByDegrees("A",mm)
+        motorCtrl:RotateByDegrees("D",mm)
+        motorCtrl:Wait("A")
+        motorCtrl:Wait("D")
+   //     motorCtrl:Stop("D")
+     //   motorCtrl:Stop("A")
+ 
+    end
+     action moveBackword (number mm)
+        moveForword(-mm)
+    end    
+
+    action turnRight 
+        motorCtrl:RotateByDegrees("A",195)
+        motorCtrl:RotateByDegrees("D",-195)
+        motorCtrl:Wait("A")
+        motorCtrl:Wait("D")
+    end
+    action turnLeft
+        motorCtrl:RotateByDegrees("A",-183)
+        motorCtrl:RotateByDegrees("D",189)
+        motorCtrl:Wait("A")
+        motorCtrl:Wait("D")
+    end
+    action stop
+        motorCtrl:Stop("A")
+        motorCtrl:Stop("D")
+    end
+    action moveForwordFor
+        motorCtrl:RotateForward ("A")
+        motorCtrl:RotateForward ("D")
+    end
+    action moveBackwordFor
+        motorCtrl:RotateBackward("A")
+        motorCtrl:RotateBackward("D")
+    end
+
+end
